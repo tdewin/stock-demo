@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-demo-deploy
+  labels:
+    app: stock-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: stock-demo
+  template:
+    metadata:
+      labels:
+        app: stock-demo
+    spec:
+      containers:
+        - name: stock-demo
+          image: tdewin/stock-demo
+          ports:
+            - name: stock-demo
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: POSTGRES_DB
+              value: stock
+            - name: POSTGRES_SERVER
+              value: stockdb-postgresql
+            - name: POSTGRES_USER
+              value: root
+            - name: POSTGRES_PORT
+              value: 5432
+            - name: ADMINKEY
+              value: unlock
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgres-password
+                  name: stockdb-postgresql
+
