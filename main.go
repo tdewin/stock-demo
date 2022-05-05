@@ -71,10 +71,11 @@ func main() {
 	/*
 		docker container run --name stockdb -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=notsecure -e POSTGRES_DB=stock -d postgres
 		set POSTGRESS_SERVER=localhost
-		set POSTGRESS_USERNAME=root
+		set POSTGRESS_USER=root
 		set POSTGRESS_PASSWORD=notsecure
 		set POSTGRESS_DB=stock
 		set POSTGRESS_PORT=5432
+		docker container run --name stockfrontend -p 14000:8080 -e POSTGRESS_SERVER=stockdb -e POSTGRES_USERNAME=root -e POSTGRES_PASSWORD=notsecure -e POSTGRESS_PORT=5432 -e POSTGRES_DB=stock -d tdewin/stock-demo
 	*/
 
 	adminkey := "unlock"
@@ -84,10 +85,13 @@ func main() {
 	}
 
 	server := os.Getenv("POSTGRESS_SERVER")
-	username := os.Getenv("POSTGRESS_USERNAME")
+	username := os.Getenv("POSTGRESS_USER")
 	password := os.Getenv("POSTGRESS_PASSWORD")
 	dbname := os.Getenv("POSTGRESS_DB")
 	port := os.Getenv("POSTGRESS_PORT")
+	if port == "" {
+		port = "5432"
+	}
 
 	dburl := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", username, password, server, port, dbname)
 	config, err := pgxpool.ParseConfig(dburl)

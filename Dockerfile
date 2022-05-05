@@ -1,7 +1,7 @@
 #force rebuild docker build --no-cache -t tdewin/stock-demo:latest .
 FROM golang AS compiler
 ENV CGO_ENABLED=0
-RUN go get -d github.com/tdewin/stock-demo && go install github.com/tdewin/stock-demo@latest && chmod 755 /go/bin/stock-demo
+RUN go install github.com/tdewin/stock-demo@latest && chmod 755 /go/bin/stock-demo
 
 FROM alpine
 LABEL maintainer="@tdewin"
