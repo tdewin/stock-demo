@@ -24,7 +24,7 @@ func initdb(ctx *context.Context, pool *pgxpool.Pool) error {
 	_, cerr := pool.Exec(*ctx, `
 CREATE TABLE IF NOT EXISTS stock (
 		id serial PRIMARY KEY,
-		product VARCHAR ( 50 ) UNIQUE NOT NULL,
+		product VARCHAR ( 50 ) NOT NULL,
 		department VARCHAR ( 50 ) NOT NULL,
 		unit VARCHAR ( 55 ) NOT NULL,
 		amount decimal ( 10,2 ),
