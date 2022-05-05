@@ -35,6 +35,6 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: postgres-password
+                  key: password
                   name: stockdb-postgresql
 
