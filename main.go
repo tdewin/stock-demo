@@ -172,6 +172,7 @@ func main() {
 		}
 		br := pool.SendBatch(ctx, transactions)
 		_, err := br.Exec()
+
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			terr = tmpl.Execute(w, NewError(err.Error()))
@@ -179,6 +180,7 @@ func main() {
 				fmt.Fprint(w, "Internal Error, could not render")
 			}
 		} else {
+			defer br.Close()
 			msg := NewMessage("Admin set executed")
 			msg.Redirect = "../"
 			msg.Refresh = 2
@@ -269,6 +271,7 @@ func main() {
 						fmt.Fprint(w, "Internal Error, could not render")
 					}
 				} else {
+					defer br.Close()
 					for k, transaction := range buymap {
 						println(k, transaction.Bought, transaction.Product)
 					}
