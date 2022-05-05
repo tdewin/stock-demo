@@ -94,9 +94,11 @@ func main() {
 	}
 
 	dburl := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", username, password, server, port, dbname)
+	fmt.Printf("postgres://%s:***@%s:%s/%s", username, server, port, dbname)
 	config, err := pgxpool.ParseConfig(dburl)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to parse config: %v\n", err)
+
 	}
 	//lazy loading so can start with errors
 	config.LazyConnect = true
