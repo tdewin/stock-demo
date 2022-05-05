@@ -70,12 +70,12 @@ func main() {
 	flag.Parse()
 	/*
 		docker container run --name stockdb -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=notsecure -e POSTGRES_DB=stock -d postgres
-		set POSTGRESS_SERVER=localhost
-		set POSTGRESS_USER=root
-		set POSTGRESS_PASSWORD=notsecure
-		set POSTGRESS_DB=stock
-		set POSTGRESS_PORT=5432
-		docker container run --name stockfrontend -p 14000:8080 -e POSTGRESS_SERVER=stockdb -e POSTGRES_USERNAME=root -e POSTGRES_PASSWORD=notsecure -e POSTGRESS_PORT=5432 -e POSTGRES_DB=stock -d tdewin/stock-demo
+		set POSTGRES_SERVER=localhost
+		set POSTGRES_USER=root
+		set POSTGRES_PASSWORD=notsecure
+		set POSTGRES_DB=stock
+		set POSTGRES_PORT=5432
+		docker container run --name stockfrontend -p 14000:8080 -e POSTGRES_SERVER=stockdb -e POSTGRES_USER=root -e POSTGRES_PASSWORD=notsecure -e POSTGRES_PORT=5432 -e POSTGRES_DB=stock -d tdewin/stock-demo
 	*/
 
 	adminkey := "unlock"
@@ -84,11 +84,11 @@ func main() {
 		adminkey = testenvadmin
 	}
 
-	server := os.Getenv("POSTGRESS_SERVER")
-	username := os.Getenv("POSTGRESS_USER")
-	password := os.Getenv("POSTGRESS_PASSWORD")
-	dbname := os.Getenv("POSTGRESS_DB")
-	port := os.Getenv("POSTGRESS_PORT")
+	server := os.Getenv("POSTGRES_SERVER")
+	username := os.Getenv("POSTGRES_USER")
+	password := os.Getenv("POSTGRES_PASSWORD")
+	dbname := os.Getenv("POSTGRES_DB")
+	port := os.Getenv("POSTGRES_PORT")
 	if port == "" {
 		port = "5432"
 	}
