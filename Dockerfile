@@ -12,5 +12,6 @@ FROM alpine
 LABEL maintainer="@tdewin"
 WORKDIR /usr/sbin/
 COPY --from=compiler /go/bin/stock-demo /usr/sbin/stock-demo
+RUN mkdir -p /var/stockdb/
 EXPOSE 8080
 CMD /usr/sbin/stock-demo
