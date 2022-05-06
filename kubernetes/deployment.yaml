@@ -54,9 +54,9 @@ spec:
           - name: config
             mountPath: "/var/stockdb"
             readOnly: true
-  volumes:
-    - name: config
-      configMap:
-        name: stock-demo-configmap
+      volumes:
+        - name: config
+          configMap:
+            name: stock-demo-configmap
 
 
