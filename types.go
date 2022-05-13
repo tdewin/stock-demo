@@ -41,5 +41,5 @@ func NewError(message string) *Message {
 }
 
 func NewMessage(message string) *Message {
-	return &Message{"success", message, "Info", 0, "", "../", 0, nil}
+	return &Message{"success", message, "Info", 0, "", "./", 0, nil}
 }

@@ -178,7 +178,6 @@ func main() {
 		} else {
 			defer br.Close()
 			msg := NewMessage("Admin set executed")
-			msg.Redirect = "../"
 			msg.Refresh = 2
 			terr = tmpl.Execute(w, msg)
 			if terr != nil {
