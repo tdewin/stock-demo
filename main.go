@@ -179,6 +179,7 @@ func main() {
 			defer br.Close()
 			msg := NewMessage("Admin set executed")
 			msg.Refresh = 2
+			msg.Redirect = "./"
 			terr = tmpl.Execute(w, msg)
 			if terr != nil {
 				fmt.Fprint(w, "Internal Error, could not render")

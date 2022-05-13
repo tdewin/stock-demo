@@ -1,4 +1,6 @@
 #force rebuild docker build --no-cache -t tdewin/stock-demo:latest .
+#docker build --no-cache -t tdewin/stock-demo:vnext .
+#docker push tdewin/stock-demo:vnext
 FROM golang AS compiler
 ENV CGO_ENABLED=0
 #ENV GOPROXY=direct
