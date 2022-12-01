@@ -13,7 +13,7 @@ actions:
         - -c
         - |
           PGPASSWORD=${POSTGRES_POSTGRES_PASSWORD} psql -h localhost -U postgres -c "select pg_backup_stop();"
-        container: postgres-postgresql
+        container: postgresql
         namespace: '{{ .StatefulSet.Namespace }}'
         pod: '{{ index .StatefulSet.Pods 0 }}'
       func: KubeExec
@@ -32,7 +32,7 @@ actions:
         - -c
         - |
           PGPASSWORD=${POSTGRES_POSTGRES_PASSWORD} psql -h localhost -U postgres -c "select pg_backup_start('app_cons');"
-        container: postgres-postgresql
+        container: postgresql
         namespace: '{{ .StatefulSet.Namespace }}'
         pod: '{{ index .StatefulSet.Pods 0 }}'
       func: KubeExec
