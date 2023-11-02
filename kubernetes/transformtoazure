@@ -1,0 +1,16 @@
+kind: TransformSet
+apiVersion: config.kio.kasten.io/v1alpha1
+metadata:
+  name: migrate
+  namespace: kasten-io
+spec:
+  comment: Migrate to Azure, update storageclass
+  transforms:
+    - subject:
+        resource: persistentvolumeclaims
+      name: Change Storage Class
+      json:
+        - op: replace
+          path: /spec/storageClassName
+          value: managed-csi
+
