@@ -1,44 +1,26 @@
-actions:
-  backupPosthook:
-    kind: ""
-    name: ""
-    phases:
-    - args:
-        command:
-        - bash
-        - -o
-        - errexit
-        - -o
-        - pipefail
-        - -c
-        - |
-          PGPASSWORD=${POSTGRES_POSTGRES_PASSWORD} psql -h localhost -U postgres -c "select pg_backup_stop();"
-        container: postgresql
-        namespace: '{{ .StatefulSet.Namespace }}'
-        pod: '{{ index .StatefulSet.Pods 0 }}'
-      func: KubeExec
-      name: afterPGBackup
-  backupPrehook:
-    kind: ""
-    name: ""
-    phases:
-    - args:
-        command:
-        - bash
-        - -o
-        - errexit
-        - -o
-        - pipefail
-        - -c
-        - |
-          PGPASSWORD=${POSTGRES_POSTGRES_PASSWORD} psql -h localhost -U postgres -c "select pg_backup_start('app_cons');"
-        container: postgresql
-        namespace: '{{ .StatefulSet.Namespace }}'
-        pod: '{{ index .StatefulSet.Pods 0 }}'
-      func: KubeExec
-      name: makePGCheckPoint
-apiVersion: cr.kanister.io/v1alpha1
 kind: Blueprint
+apiVersion: cr.kanister.io/v1alpha1
 metadata:
-  name: postgresql-application-consistent
+  name: postgresql-hooks
   namespace: kasten-io
+actions:
+  backupPrehook:
+    name: ""
+    kind: ""
+    phases:
+      - func: KubeExec
+        name: makePGCheckPoint
+        args:
+          command:
+            - bash
+            - -o
+            - errexit
+            - -o
+            - pipefail
+            - -c
+            - >
+              PGPASSWORD=${POSTGRES_POSTGRES_PASSWORD} psql -d
+              ${POSTGRES_DATABASE} -U postgres -c "CHECKPOINT;"
+          container: postgresql
+          namespace: "{{ .StatefulSet.Namespace }}"
+          pod: "{{ index .StatefulSet.Pods 0 }}"
