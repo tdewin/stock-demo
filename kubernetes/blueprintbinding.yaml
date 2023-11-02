@@ -1,0 +1,24 @@
+apiVersion: config.kio.kasten.io/v1alpha1
+kind: BlueprintBinding
+metadata:
+  name: postgres-blueprint-binding
+  namespace: kasten-io
+spec:
+  blueprintRef:
+    name: postgresql-hooks
+    namespace: kasten-io
+  resources:
+    matchAll:
+      - type:
+          operator: In
+          values:
+            - group: apps
+              resource: statefulsets
+      - annotations:
+          key: kanister.kasten.io/blueprint
+          operator: DoesNotExist
+      - labels:
+          key: helm.sh/chart
+          operator: In
+          values:
+            - "postgresql-13.0.0"
