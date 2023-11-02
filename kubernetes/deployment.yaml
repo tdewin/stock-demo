@@ -1,11 +1,11 @@
 apiVersion: v1
 data:
   initinsert.psql: |
-    INSERT INTO stock(product,unit,amount,price) VALUES ('Veeam VBR Socket','Socket',0.0,2000);
+    INSERT INTO stock(product,unit,amount,price) VALUES ('Veeam VBR Socket','Socket',5000.0,2000);
     INSERT INTO stock(product,unit,amount,price) VALUES ('Veeam VBR VUL','VUL (10 pack)',10000.0,1500);
     INSERT INTO stock(product,unit,amount,price) VALUES ('Kasten K10','Node',10000.0,1500);
     INSERT INTO stock(product,unit,amount,price) VALUES ('Veeam Backup for M365','User',10000.0,1500.0);
-    INSERT INTO stock(product,unit,amount,price) VALUES ('Veeam Backup for Salesforce','User',0.0,10000.0);
+    INSERT INTO stock(product,unit,amount,price) VALUES ('Veeam Backup for Salesforce','User',100.0,10000.0);
 kind: ConfigMap
 metadata:
   creationTimestamp: null
