@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: stock-demo-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: stock-demo-svc
+            port:
+              number: 80
+        path: /stock/
+        pathType: ImplementationSpecific
